@@ -12,7 +12,7 @@ RUN useradd -rm -d /home/chatgpt -s /usr/bin/gpt_cli -u 1001 chatgpt
 COPY --from=builder /gpt_cli /usr/bin/gpt_cli
 RUN chmod +x /usr/bin/gpt_cli
 RUN mkdir /var/run/sshd \
-    && echo 'chatgpt:password' | chpasswd \
+    && echo 'chatgpt:${PASSWORD}' | chpasswd \
     && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config \
     && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config \
     && echo "ForceCommand /usr/bin/gpt_cli" >> /etc/ssh/sshd_config
