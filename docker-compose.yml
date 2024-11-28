@@ -1,0 +1,7 @@
+services:
+  gpt-ssh:
+    build: .
+    container_name: gpt-ssh
+    hostname: got-ssh
+    volumes:
+      - ./ssh/authorized_keys:~/.ssh/authorized_keys
